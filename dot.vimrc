@@ -49,12 +49,15 @@ call vundle#begin()
 
 Plugin 'lervag/vimtex'
 Plugin 'fatih/vim-go'
+Plugin 'arcticicestudio/nord-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'itchyny/lightline.vim'
+Plugin 'mhartington/oceanic-next'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
+Plugin 'powerline/powerline-fonts'
 
 call vundle#end()
 
@@ -65,11 +68,23 @@ autocmd vimenter * NERDTree
 " Remove trailing whitespaces on-save
 autocmd BufWritePre * %s/\s\+$//e
 
+" Nord-vim
+let g:nord_italic_comments = 1
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 " Rust
 let g:rustfmt_autosave = 1
+let g:rustfmt_comman = 'cargo fmt'
 let g:race_cmd = "/home/helge/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 inoremap <Nul> <C-x><C-o>
+
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ }
 
 " Golang spesific
 let g:go_fmt_command = "goimports"
@@ -189,17 +204,11 @@ set foldcolumn=1
 " Enable syntax highlighting
 syntax enable
 
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
 
 try
-    colorscheme PaperColor
+    colorscheme nord
 catch
 endtry
-
-set background=dark
 
 set number
 
